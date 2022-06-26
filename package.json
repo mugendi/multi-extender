@@ -1,0 +1,25 @@
+{
+  "name": "multi-extender",
+  "version": "1.0.0",
+  "description": "Simply extend one class with a multiple others",
+  "keywords": [
+    "class",
+    "extend",
+    "inheritance",
+    "multiple"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anthony Mugendi <ngurumugz@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mugendi/multi-extender.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mugendi/multi-extender/issues"
+  },
+  "homepage": "https://github.com/mugendi/multi-extender#readme"
+}
