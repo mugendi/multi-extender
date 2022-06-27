@@ -15,7 +15,10 @@
 module.exports =
 	(...mixins) =>
 	(Base) => {
-		const copyProps = (target, source) => {
+		const copyProps = (target, source, { prefix, suffix }) => {
+			// console.log(Object.getOwnPropertyNames(source))
+			// console.log(Object.getOwnPropertySymbols(source))
+
 			Object.getOwnPropertyNames(source)
 				.concat(Object.getOwnPropertySymbols(source))
 				.forEach((prop) => {
@@ -26,16 +29,31 @@ module.exports =
 					) {
 						return;
 					}
+
+					let propName=prop;
+
+					if (prefix) propName = `${prefix}${prop}`;
+					if (suffix) propName = `${prop}${suffix}`;
+
 					Object.defineProperty(
 						target,
-						prop,
+						propName,
 						Object.getOwnPropertyDescriptor(source, prop)
 					);
 				});
 		};
+
 		mixins.forEach((mixin) => {
-			copyProps(Base, mixin);
-			copyProps(Base.prototype, mixin.prototype);
+			// Get source prefix && suffix
+			let sourceStr = mixin.toString();
+			let m = sourceStr.match(/#__prefix\s*=\s*["'`]([^"'`]+)/);
+			let prefix = m && m.length && m[1];
+			m = sourceStr.match(/#__suffix\s*=\s*["'`]([^"'`]+)/);
+			let suffix = m && m.length && m[1];
+
+			copyProps(Base, mixin, { prefix, suffix });
+			copyProps(Base.prototype, mixin.prototype, { prefix, suffix });
 		});
+
 		return Base;
 	};

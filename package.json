@@ -1,6 +1,6 @@
 {
   "name": "multi-extender",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simply extend one class with a multiple others",
   "keywords": [
     "class",
